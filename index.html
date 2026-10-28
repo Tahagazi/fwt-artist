@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Fwt Artist | زیورآلات چوبی و طرح‌های اختصاصی</title>
+
+<meta charset="UTF-8">
+<meta name="description" content="زیورآلات دست‌ساز چوبی و استیل با طرح‌های خاص، حکاکی و چاپ تصاویر دلخواه؛ هر طرح، یک خاطره ماندگار.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#F7F0E4">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:site_name" content="Fwt Artist">
+<meta property="og:title" content="Fwt Artist | زیورآلات چوبی و طرح‌های اختصاصی">
+<meta property="og:description" content="گردنبند، گوشواره، دستبند و حلقه با طرح‌های خاص و امکان سفارش طرح اختصاصی، با الهام از هنر دست و دریا.">
+<meta property="og:url" content="https://YOUR-DOMAIN.com/">
+<meta property="og:image" content="static/images/og/fwt-og.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="زیورآلات چوبی حکاکی‌شده با الهام از کشتی تایتانیک">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fwt Artist | زیورآلات چوبی و طرح‌های اختصاصی">
+<meta name="twitter:description" content="زیورآلات دست‌ساز چوبی و استیل با طرح‌های دریایی و امکان سفارش طرح دلخواه.">
+<meta name="twitter:image" content="static/images/og/fwt-og.webp">
+
+
+<!-- fave icon -->
+
+<link rel="icon" href="static/faveicon/favicon.ico" sizes="any">
+<link rel="icon" href="static/faveicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="static/faveicon/favicon-96x96.png" type="image/png" sizes="96x96">
+
+<link rel="apple-touch-icon" href="static/faveicon/apple-touch-icon.png">
+
+<link rel="manifest" href="static/faveicon/site.webmanifest">
+
+
+<!-- theme save -->
+
+<script>
+  (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+
+<!-- Swiper -->
+<link rel="stylesheet" href="static/swiper/swiper.min.css">
+<script src="static/swiper/swiper.min.js"></script>
+
+<!-- Alpine.js -->
+<script defer src="static/collapse.js"></script>
+<script defer src="static/alpine.js"></script>
+
+<script src="static/js/data.js"></script>
+
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/output.css">
+
+</head>
+<body x-data="shopApp()" @keydown.escape.window="escape()" @click.window="if(!$event.target.closest('.cap,.dd')) openDd=null" x-cloak>
+
+<!-- ============ HEADER ============ -->
+<header class="hdr">
+  <div class="hdr-in">
+    <button class="ibtn" @click="menuOpen=true" aria-label="منو"><span class="ico" x-html="ic('menu')"></span></button>
+    <div class="logo"><span class="ico" x-html="ic('crown')"></span><b>Fwt</b><small>artist</small></div>
+    <button class="ibtn" @click="contactOpen=true" aria-label="تماس"><span class="ico" x-html="ic('phone')"></span></button>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section id="home" class="hero">
+  <div class="swiper hero-swiper" dir="rtl">
+    <div class="swiper-wrapper">
+      
+      <div class="swiper-slide slot" :style="{ backgroundImage: `url('static/images/${theme === 'dark' ? 'hero-1' : 'hero-1-2'}.webp')` }">
+        <div class="hero-shade"></div>
+        <div class="hero-txt"><h1>هر طرح، یک خاطره</h1><p>عکس و طرح دلخواه شما، روی چوب و استیل با دقت بالا</p><a href="#custom" class="btn">سفارش طرح اختصاصی<span class="ico" x-html="ic('arrowL')"></span></a></div>
+      </div>
+
+      <div class="swiper-slide slot" :style="{ backgroundImage: `url('static/images/${theme === 'dark' ? 'hero-2' : 'hero-2-2'}.webp')` }">
+        <div class="hero-shade"></div>
+        <div class="hero-txt"><h1>هنر دست، الهام دریا</h1><p>مجموعه‌ای از گردنبند، گوشواره، دستبند و حلقه</p><a href="#products" class="btn"> مشاهده محصولات<span class="ico" x-html="ic('arrowL')"></span></a></div>
+      </div>
+
+    </div>
+    <div class="hero-pg" style="right: 0;"></div>
+  </div>
+</section>
+
+<!-- ============ CATEGORIES ============ -->
+<section id="categories" class="wrap mt-[var(--space-8)] flex flex-col gap-[var(--gap-lg)]">
+  <h2 class="sec-title">دسته‌بندی‌ها</h2>
+  <div class="cat-wrap">
+    <button class="ibtn cat-nav cat-next" style="left:0" aria-label="بعدی"><span class="ico" x-html="ic('chevL')"></span></button>
+    <button class="ibtn cat-nav cat-prev" style="right:0" aria-label="قبلی"><span class="ico" x-html="ic('chevR')"></span></button>
+    <div class="swiper cat-swiper" dir="rtl">
+      <div class="swiper-wrapper">
+        <template x-for="c in cats" :key="c.title">
+          <div class="swiper-slide"><button class="cat" @click="pickCategory(c.title)"><img :src="c.image" :alt="c.title"><span x-text="c.title"></span></button></div>
+        </template>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FILTER / SORT / GRID ============ -->
+<section id="products" class="wrap mt-[var(--space-8)] flex flex-col gap-[var(--gap-md)]">
+  <div class="fbar">
+    <div class="fscroll" x-ref="bar">
+      <button class="cap" :class="filterCount&&'is-active'" @click="openDrawer()">
+        <span class="ico" x-html="ic('sliders')"></span>فیلترها
+        <span class="badge" x-show="filterCount" x-text="fmt(filterCount)"></span>
+      </button>
+      <template x-for="f in quickDefs" :key="f.key">
+        <div class="cap" role="button" tabindex="0" :class="isOn(f.key)&&'is-active'" :style="'anchor-name:--qf-'+f.key" @click="toggleDd(f.key)" @keydown.enter="toggleDd(f.key)">
+          <span x-text="capLabel(f)"></span>
+          <button class="cap-x" x-show="isOn(f.key)" @click.stop="clear(f.key)" aria-label="حذف فیلتر"><span class="ico" x-html="ic('close')"></span></button>
+          <span class="ico" :class="openDd===f.key&&'rot'" x-html="ic('chev')"></span>
+        </div>
+      </template>
+    </div>
+    <div class="sortbox">
+      <small>مرتب‌سازی</small>
+      <div class="cap" role="button" tabindex="0" style="anchor-name:--sort" @click="toggleDd('sort')" @keydown.enter="toggleDd('sort')">
+        <span x-text="sortLabel"></span><span class="ico" :class="openDd==='sort'&&'rot'" x-html="ic('chev')"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick filter dropdowns (CSS Anchor Positioning) -->
+  <template x-for="f in defs" :key="'dd'+f.key">
+    <div class="dd" x-show="openDd===f.key" x-transition.opacity :style="'position-anchor:--qf-'+f.key">
+      <template x-for="o in f.options" :key="o.value">
+        <button class="dd-opt" :class="filters[f.key].includes(o.value)&&'on'" @click="quickSelect(f.key,o.value)">
+          <img x-show="o.image" :src="o.image" :alt="o.label"><span x-text="o.label"></span>
+          <span class="ico ck" x-show="filters[f.key].includes(o.value)" x-html="ic('check')"></span>
+        </button>
+      </template>
+    </div>
+  </template>
+  <div class="dd dd-end" x-show="openDd==='sort'" x-transition.opacity style="position-anchor:--sort">
+    <template x-for="s in sortOptions" :key="s.value">
+      <button class="dd-opt" :class="sort===s.value&&'on'" @click="setSort(s.value)"><span x-text="s.label"></span><span class="ico ck" x-show="sort===s.value" x-html="ic('check')"></span></button>
+    </template>
+  </div>
+
+  <p class="text-[var(--text-muted)]" x-text="fmt(filtered.length)+' محصول'"></p>
+
+  <div class="grid grid-cols-1 min-[350px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[var(--gap-md)]" x-show="pageItems.length">
+    <template x-for="(p,i) in pageItems" :key="gridVersion+'-'+p.id">
+      <button class="card" :style="'animation-delay:calc('+i+' * var(--transition-fast) / 3)'" @click="openProduct(p)">
+        <div class="card-img"><img :src="p.images[0]" :alt="p.title" loading="lazy"></div>
+        <div class="card-b">
+          <div class="card-t" x-text="p.title"></div>
+          <div class="card-m" x-text="p.category+' · '+p.material+' · '+p.workType"></div>
+          <div class="card-p" x-text="price(p.price)"></div>
+        </div>
+      </button>
+    </template>
+  </div>
+
+  <div class="empty" x-show="!pageItems.length" x-cloak>
+    <span class="ico" x-html="ic('search')"></span>
+    <p>محصولی با این فیلترها پیدا نشد.</p>
+    <button class="btn btn-ghost btn-sm" @click="resetAll()">حذف همه فیلترها</button>
+  </div>
+
+  <nav class="flex justify-center items-center gap-[var(--gap-sm)] flex-wrap mt-[var(--space-4)]" x-show="totalPages>1">
+    <button class="pg" :disabled="page===1" @click="goPage(page-1)" aria-label="قبلی"><span class="ico" x-html="ic('chevR')"></span></button>
+    <template x-for="(n,i) in pages" :key="i+'-'+n">
+      <span x-show="n==='…'" class="text-[var(--text-muted)]">…</span>
+    </template>
+    <template x-for="(n,i) in pages" :key="'b'+i+'-'+n">
+      <button class="pg" x-show="n!=='…'" :class="n===page&&'on'" @click="goPage(n)" x-text="fmt(n)"></button>
+    </template>
+    <button class="pg" :disabled="page===totalPages" @click="goPage(page+1)" aria-label="بعدی"><span class="ico" x-html="ic('chevL')"></span></button>
+  </nav>
+</section>
+
+<!-- ============ CUSTOM ORDER ============ -->
+<section id="custom" class="custom slot mt-[var(--space-16)]" :style="{ backgroundImage: `url('static/images/${theme === 'dark' ? 'custom-bg' : 'custom-bg-2'}.webp')` }"> <!-- تصویر پس‌زمینه سکشن طرح اختصاصی -->
+  <div class="custom-shade"></div>
+  <div class="custom-in">
+    <h2>طرح اختصاصی خود را سفارش دهید</h2>
+    <p>اگر طرح خاصی در ذهن دارید، ما آن را برای شما با بالاترین دقت و کیفیت روی چوب اجرا می‌کنیم.</p>
+    <button class="btn" @click="orderCustom()">ثبت سفارش طرح اختصاصی<span class="ico" x-html="ic('arrowL')"></span></button>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="wrap grid grid-cols-2 md:grid-cols-4 max-md:[&>*:nth-child(3)]:border-0 py-[var(--space-8)]">
+  <template x-for="f in features" :key="f.t">
+    <div class="feat"><span class="ico" x-html="ic(f.i)"></span><b x-text="f.t"></b><small x-text="f.s"></small></div>
+  </template>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer id="contact" class="footer slot" :style="{ backgroundImage: `url('static/images/${theme === 'dark' ? 'footer' : 'footer-2'}.webp')` }"> <!-- تصویر پس‌زمینه فوتر -->
+  <div class="footer-shade"></div>
+  <div class="footer-in">
+    <div class="f-grid">
+      <div class="logo"><span class="ico" x-html="ic('crown')"></span><b>Fwt</b><small>artist</small></div>
+      <div class="f-col"><h4>ارتباط با ما</h4>
+        <a href="tel:+989123456789"><span class="ico" x-html="ic('phone')"></span><span dir="ltr">۰۹۱۲ ۳۴۵ ۶۷۸۹</span></a>
+        <a href="mailto:info@fwtartist.com"><span class="ico" x-html="ic('mail')"></span>info@fwtartist.com</a>
+        <button class="btn btn-ghost btn-sm" @click="contactOpen=true">باز کردن تماس</button>
+      </div>
+      <div class="f-col"><h4>محصولات</h4>
+        <template x-for="c in cats" :key="'f'+c.title"><button @click="pickCategory(c.title)" x-text="c.title"></button></template>
+      </div>
+      <div class="f-col"><h4>ما را دنبال کنید</h4>
+        <div class="social">
+          <a class="ibtn" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="اینستاگرام"><span class="ico" x-html="ic('instagram')"></span></a>
+          <a class="ibtn" href="https://wa.me/989123456789" target="_blank" rel="noopener" aria-label="واتساپ"><span class="ico" x-html="ic('whatsapp')"></span></a>
+          <a class="ibtn" :href="'https://t.me/'+adminTelegram" target="_blank" rel="noopener" aria-label="تلگرام"><span class="ico" x-html="ic('telegram')"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="f-bottom"><span dir="ltr">© 2025 FwtArtist. All rights reserved.</span><span dir="ltr">Design &amp; Developed By MohammadTaha</span></div>
+  </div>
+</footer>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="ovl" x-show="menuOpen" x-transition.opacity @click="menuOpen=false"></div>
+<aside class="panel" :class="menuOpen&&'open'">
+  <div class="panel-h"><div class="logo" style="flex-direction:row;gap:var(--gap-sm)"><span class="ico" x-html="ic('crown')"></span><b>Fwt</b><small>artist</small></div>
+    <button class="ibtn" @click="menuOpen=false" aria-label="بستن"><span class="ico" x-html="ic('close')"></span></button></div>
+  <nav class="panel-b">
+    <template x-for="l in links" :key="l.id">
+      <a class="menu-link" :class="activeLink===l.id&&'on'" :href="l.href" @click="menuClick(l,$event)" >
+        <span class="ico" x-html="ic(l.id)"></span>
+        <span x-text="l.label"></span>
+      </a>
+    </template>
+  </nav>
+
+  <div class="panel-f">
+    <button type="button" class="btn btn-primary btn-block" @click="toggleTheme()" style="align-self: stretch;">
+        <!-- <svg class="i"><use :href="theme === 'dark' ? '#i-sun' : '#i-moon'"/></svg> -->
+        <span class="ico" x-html="theme === 'dark' ? ic('sun') : ic('moon')"></span>
+        <span x-text="theme === 'dark' ? 'حالت روشن' : 'حالت تیره'"></span>
+    </button>
+  </div>
+
+</aside>
+
+<!-- ============ ALL FILTERS DRAWER ============ -->
+<div class="ovl" x-show="drawerOpen" x-transition.opacity @click="drawerOpen=false"></div>
+<aside class="panel" :class="drawerOpen&&'open'">
+  <div class="panel-h"><span>همه فیلترها</span><button class="ibtn" @click="drawerOpen=false" aria-label="بستن"><span class="ico" x-html="ic('close')"></span></button></div>
+  <div class="panel-b">
+    <template x-for="f in defs" :key="'a'+f.key">
+      <div class="acc">
+        <button class="acc-h" @click="openAcc=openAcc===f.key?null:f.key">
+          <span class="acc-ico"><span class="ico" x-html="ic(f.icon)"></span></span>
+          <span class="flex-1 text-start font-semibold" x-text="f.label"></span>
+          <span class="badge" x-show="draft[f.key].length" x-text="fmt(draft[f.key].length)"></span>
+          <span class="ico" :class="openAcc===f.key&&'rot'" x-html="ic('chev')"></span>
+        </button>
+        <div class="acc-b" :class="openAcc===f.key&&'open'"><div><div class="acc-list">
+          <template x-for="o in f.options" :key="o.value">
+            <button class="opt" :class="draft[f.key].includes(o.value)&&'on'" @click="toggleDraft(f.key,o.value)">
+              <span class="chk"><span class="ico" x-show="draft[f.key].includes(o.value)" x-html="ic('check')"></span></span>
+              <img x-show="o.image" :src="o.image" :alt="o.label"><span x-text="o.label"></span>
+            </button>
+          </template>
+        </div></div></div>
+      </div>
+    </template>
+  </div>
+  <div class="panel-f">
+    <button class="btn btn-ghost" @click="draft=blank()">پاک کردن</button>
+    <button class="btn flex-1 justify-center" @click="applyDraft()" x-text="'اعمال فیلترها ('+fmt(draftCount)+' محصول)'"></button>
+  </div>
+</aside>
+
+<!-- ============ PRODUCT MODAL ============ -->
+<div class="modal" x-show="modalOpen" x-cloak>
+  <div class="ovl" x-show="modalOpen" x-transition:enter="fx" x-transition:enter-start="fx-fade" x-transition:leave="fx" x-transition:leave-end="fx-fade" @click="modalOpen=false"></div>
+  <div class="dlg dlg-lg" x-show="modalOpen" style="z-index:calc(var(--z-overlay) + 1)" x-transition:enter="fx" x-transition:enter-start="fx-hide" x-transition:leave="fx" x-transition:leave-end="fx-hide" role="dialog" aria-modal="true">
+    <template x-if="current">
+      <div class="flex flex-col h-full min-h-0">
+        <div class="dlg-h"><span x-text="current.title"></span><button class="ibtn" @click="modalOpen=false" aria-label="بستن"><span class="ico" x-html="ic('close')"></span></button></div>
+        <div class="dlg-b dlg-grid">
+          <div>
+            <div class="gal-main" @touchstart.passive="tx=$event.touches[0].clientX" @touchend="swipe($event)">
+              <img :src="current.images[imgIndex]" :alt="current.title">
+              <template x-if="current.images.length>1"><div>
+                <button class="gal-btn" style="left:var(--space-3)" @click="step(1)" aria-label="بعدی"><span class="ico" x-html="ic('chevL')"></span></button>
+                <button class="gal-btn" style="right:var(--space-3)" @click="step(-1)" aria-label="قبلی"><span class="ico" x-html="ic('chevR')"></span></button>
+              </div></template>
+              <span class="gal-count" x-text="fmt(imgIndex+1)+' / '+fmt(current.images.length)"></span>
+            </div>
+            <div class="thumbs" x-ref="thumbs">
+              <template x-for="(im,i) in current.images" :key="im">
+                <button class="thumb" :class="i===imgIndex&&'on'" @click="imgIndex=i"><img :src="im" alt=""></button>
+              </template>
+            </div>
+          </div>
+          <div class="info">
+            <h3 class="text-[var(--font-size-xl)] font-bold" x-text="current.title"></h3>
+            <div class="info-price" x-text="price(current.price)"></div>
+            <p class="text-[var(--text-secondary)] leading-[var(--line-relaxed)]" x-show="current.desc" x-text="current.desc"></p>
+            <dl>
+              <div class="info-row"><dt>دسته‌بندی</dt><dd x-text="current.category"></dd></div>
+              <div class="info-row"><dt>جنس</dt><dd x-text="current.material"></dd></div>
+              <div class="info-row"><dt>نوع کار</dt><dd x-text="current.workType"></dd></div>
+            </dl>
+          </div>
+        </div>
+        <div class="dlg-f"><a class="btn btn-block" :href="orderUrl(current)" target="_blank" rel="noopener"><span class="ico" x-html="ic('telegram')"></span>ثبت سفارش در تلگرام</a></div>
+      </div>
+    </template>
+  </div>
+</div>
+
+<!-- ============ CONTACT MODAL ============ -->
+<div class="modal pad" x-show="contactOpen" x-cloak>
+  <div class="ovl" x-show="contactOpen" x-transition:enter="fx" x-transition:enter-start="fx-fade" x-transition:leave="fx" x-transition:leave-end="fx-fade" @click="contactOpen=false"></div>
+  <div class="dlg dlg-sm" x-show="contactOpen" style="z-index:calc(var(--z-overlay) + 1)" x-transition:enter="fx" x-transition:enter-start="fx-hide" x-transition:leave="fx" x-transition:leave-end="fx-hide" role="dialog" aria-modal="true">
+    <div class="dlg-h"><span>تماس با ما</span><button class="ibtn" @click="contactOpen=false" aria-label="بستن"><span class="ico" x-html="ic('close')"></span></button></div>
+    <div class="info">
+      <a class="opt" href="tel:+989123456789"><span class="acc-ico"><span class="ico" x-html="ic('phone')"></span></span><span dir="ltr">۰۹۱۲ ۳۴۵ ۶۷۸۹</span></a>
+      <a class="opt" href="mailto:info@fwtartist.com"><span class="acc-ico"><span class="ico" x-html="ic('mail')"></span></span>info@fwtartist.com</a>
+      <a class="opt" :href="'https://t.me/'+adminTelegram" target="_blank" rel="noopener"><span class="acc-ico"><span class="ico" x-html="ic('telegram')"></span></span>تلگرام</a>
+      <a class="opt" href="https://instagram.com/" target="_blank" rel="noopener"><span class="acc-ico"><span class="ico" x-html="ic('instagram')"></span></span>اینستاگرام</a>
+    </div>
+  </div>
+</div>
+
+<script>
+function shopApp() {
+  const keys = ['category', 'material', 'workType'];
+  const opt = a => a.map(o => typeof o === 'string' ? { value: o, label: o } : { value: o.title, label: o.title, image: o.image });
+  const P = {
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>', close: '<path d="M6 6l12 12M18 6 6 18"/>',
+    chev: '<path d="m6 9 6 6 6-6"/>', chevL: '<path d="m15 18-6-6 6-6"/>', chevR: '<path d="m9 18 6-6-6-6"/>',
+    check: '<path d="m5 12 5 5 9-10"/>', arrowL: '<path d="M19 12H5m6-6-6 6 6 6"/>',
+    phone: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>',
+    sliders: '<path d="M4 6h8M18 6h2M4 12h2M12 12h8M4 18h10M20 18h0"/><circle cx="15" cy="6" r="2.2"/><circle cx="9" cy="12" r="2.2"/><circle cx="17" cy="18" r="2.2"/>',
+    grid: '<rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/>',
+    layers: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 17.500 9 5 9-5" opacity=".5"/>',
+    brush: '<path d="M18.400 2.600a2 2 0 0 1 3 3L12 15l-4 1 1-4z"/><path d="M7 17c0 2-1 3-4 4 3 0 6-.5 7-3"/>',
+    shield: '<path d="M12 3 4 6v6c0 5 3.500 8 8 9 4.500-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+    truck: '<path d="M2 6h11v10H2z"/><path d="M13 9h4l4 4v3h-8z"/><circle cx="6.500" cy="17.500" r="1.800"/><circle cx="17" cy="17.500" r="1.800"/>',
+    gift: '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8C10 4 6 4 7 7s5 1 5 1zm0 0c2-4 6-4 5-1s-5 1-5 1z"/>',
+    headset: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1"/><rect x="17" y="14" width="4" height="6" rx="1"/><path d="M19 20c0 1.500-2 2-5 2"/>',
+    mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+    instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.500" cy="6.500" r=".6"/>',
+    telegram: '<path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/><path d="m9 13 12-9"/>',
+    whatsapp: '<path d="M3 21l1.600-4.600A9 9 0 1 1 8 19.500z"/><path d="M9 9c0 3 3 6 6 6l1-1.500-2-1-1 .8c-1-.5-2-1.500-2.500-2.500l.8-1-1-2z"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/>',
+    crown: '<path d="M3 8l4.500 4L12 5l4.500 7L21 8l-2 11H5z" fill="currentColor" fill-opacity=".25"/><circle cx="12" cy="3" r="1" fill="currentColor"/><path d="M6 22h12"/>',
+    home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/>',
+    products: '<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/>',
+    custom: '<path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.07"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/>',
+    contact: '<path d="M4 4h16v12H8l-4 4z"/><path d="M8 9h8"/><path d="M8 12.5h5"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.9 4.9l1.4 1.4"/><path d="M17.7 17.7l1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M6.3 17.7l-1.4 1.4"/><path d="M19.1 4.9l-1.4 1.4"/>',
+    moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+  };
+  return {
+    theme: document.documentElement.getAttribute('data-theme') || 'light',
+    cats: categories,
+    defs: [
+      { key: 'category', label: 'دسته‌بندی', icon: 'grid', options: opt(categories) },
+      { key: 'material', label: 'جنس', icon: 'layers', options: opt(materials) },
+      { key: 'workType', label: 'نوع کار', icon: 'brush', options: opt(workTypes) }
+    ],
+    sortOptions: [{ value: 'newest', label: 'جدیدترین' }, { value: 'oldest', label: 'قدیمی‌ترین' }, { value: 'cheap', label: 'ارزان‌ترین' }, { value: 'expensive', label: 'گران‌ترین' }],
+    features: [{ i: 'shield', t: 'کیفیت بالا', s: 'استفاده از بهترین متریال' }, { i: 'truck', t: 'ارسال سریع', s: 'به سراسر کشور' }, { i: 'gift', t: 'بسته‌بندی خاص', s: 'مناسب برای هدیه' }, { i: 'headset', t: 'پشتیبانی', s: 'همیشه در کنار شما' }],
+    links: [{ id: 'home', label: 'خانه', href: '#home' }, { id: 'products', label: 'محصولات', href: '#products' }, { id: 'custom', label: 'طرح اختصاصی', href: '#custom' }, { id: 'contact', label: 'تماس با ما', href: '#contact' }],
+    adminTelegram: 'fwtartist', // نام کاربری تلگرام ادمین
+
+    activeLink: 'home', menuOpen: false, contactOpen: false, drawerOpen: false, modalOpen: false,
+    openDd: null, openAcc: 'category', sort: 'newest', page: 1, perPage: 6, gridVersion: 0,
+    filters: { category: [], material: [], workType: [] }, draft: { category: [], material: [], workType: [] },
+    activeOrder: [], current: null, imgIndex: 0, tx: 0,
+
+    init() {
+      this.$watch('locked', v => document.body.style.overflow = v ? 'hidden' : '');
+      this.$watch('imgIndex', i => this.$nextTick(() => this.$refs.thumbs?.children[i]?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' })));
+      this.$nextTick(() => {
+        new Swiper('.hero-swiper', { loop: true, speed: 600, autoplay: { delay: 5000, disableOnInteraction: false }, pagination: { el: '.hero-pg', clickable: true } });
+        new Swiper('.cat-swiper', { slidesPerView: 'auto', spaceBetween: 16, freeMode: true, navigation: { prevEl: '.cat-prev', nextEl: '.cat-next' } });
+      });
+    },
+    ic(n) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + P[n] + '</svg>'; },
+    fmt(n) { return Number(n).toLocaleString('fa-IR'); },
+    price(n) { return this.fmt(n) + ' تومان'; },
+    blank() { return { category: [], material: [], workType: [] }; },
+    get locked() { return this.drawerOpen || this.modalOpen || this.menuOpen || this.contactOpen; },
+
+    /* ---- Filtering → Sorting → Pagination ---- */
+    get filtered() { return products.filter(p => keys.every(k => !this.filters[k].length || this.filters[k].includes(p[k]))); },
+    get sorted() {
+      const a = [...this.filtered];
+      const s = { newest: (x, y) => y.id - x.id, oldest: (x, y) => x.id - y.id, cheap: (x, y) => x.price - y.price, expensive: (x, y) => y.price - x.price };
+      return a.sort(s[this.sort]);
+    },
+    get totalPages() { return Math.max(1, Math.ceil(this.sorted.length / this.perPage)); },
+    get pageItems() { return this.sorted.slice((this.page - 1) * this.perPage, this.page * this.perPage); },
+    get pages() {
+      const t = this.totalPages, c = this.page;
+      const set = [...new Set([1, t, c - 1, c, c + 1].filter(n => n >= 1 && n <= t))].sort((a, b) => a - b);
+      const out = [];
+      set.forEach((n, i) => { if (i && n - set[i - 1] > 1) out.push('…'); out.push(n); });
+      return out;
+    },
+    get draftCount() { return products.filter(p => keys.every(k => !this.draft[k].length || this.draft[k].includes(p[k]))).length; },
+    get filterCount() { return keys.reduce((s, k) => s + this.filters[k].length, 0); },
+    get sortLabel() { return this.sortOptions.find(s => s.value === this.sort).label; },
+    changed() { this.page = 1; this.gridVersion++; },
+    goPage(n) { this.page = n; this.gridVersion++; document.getElementById('products').scrollIntoView({ behavior: 'smooth' }); },
+
+    /* ---- Shared filter state: quick (single) + drawer (multi) ---- */
+    isOn(k) { return this.filters[k].length > 0; },
+    syncOrder(first) {
+      this.activeOrder = this.activeOrder.filter(k => this.isOn(k));
+      keys.forEach(k => { if (this.isOn(k) && !this.activeOrder.includes(k)) this.activeOrder.unshift(k); });
+      if (first && this.isOn(first)) this.activeOrder = [first, ...this.activeOrder.filter(k => k !== first)];
+    },
+    get quickDefs() {
+      const act = this.activeOrder.map(k => this.defs.find(d => d.key === k));
+      return [...act, ...this.defs.filter(d => !this.isOn(d.key))];
+    },
+    capLabel(f) {
+      const v = this.filters[f.key];
+      return v.length ? f.label + ' : ' + v[0] + (v.length > 1 ? ' +' + this.fmt(v.length - 1) : '') : f.label;
+    },
+    toggleDd(k) { this.openDd = this.openDd === k ? null : k; },
+    quickSelect(k, v) {
+      this.filters[k] = [v]; this.syncOrder(k); this.openDd = null; this.changed();
+      this.$nextTick(() => this.$refs.bar.scrollTo({ left: 0, behavior: 'smooth' })); // RTL: scrollLeft 0 = سمت راست
+    },
+    clear(k) { this.filters[k] = []; this.syncOrder(); this.changed(); },
+    resetAll() { this.filters = this.blank(); this.syncOrder(); this.changed(); },
+    pickCategory(c) {
+      this.filters.category = [c]; this.syncOrder('category'); this.changed(); this.menuOpen = false;
+      document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+      this.$nextTick(() => this.$refs.bar.scrollTo({ left: 0, behavior: 'smooth' }));
+    },
+    openDrawer() { this.draft = JSON.parse(JSON.stringify(this.filters)); this.drawerOpen = true; },
+    toggleDraft(k, v) { const a = this.draft[k], i = a.indexOf(v); i > -1 ? a.splice(i, 1) : a.push(v); },
+    applyDraft() {
+      this.filters = JSON.parse(JSON.stringify(this.draft)); this.syncOrder(); this.drawerOpen = false; this.changed();
+      this.$nextTick(() => this.$refs.bar.scrollTo({ left: 0, behavior: 'smooth' }));
+    },
+    setSort(v) { this.sort = v; this.openDd = null; this.changed(); },
+
+    /* ---- Modal / gallery ---- */
+    openProduct(p) { this.current = p; this.imgIndex = 0; this.modalOpen = true; },
+    step(d) { const n = this.current.images.length; this.imgIndex = (this.imgIndex + d + n) % n; },
+    swipe(e) { const dx = e.changedTouches[0].clientX - this.tx; if (Math.abs(dx) > 40) this.step(dx < 0 ? 1 : -1); }, // RTL: کشیدن به چپ = بعدی
+    orderUrl(p) {
+      const msg = ['سلام، وقت بخیر 🌿', 'می‌خواهم این محصول را سفارش بدهم:', '', '📌 ' + p.title, p.desc ? '📝 ' + p.desc : '',
+        '📂 دسته‌بندی: ' + p.category, '🪵 جنس: ' + p.material, '🎨 نوع کار: ' + p.workType, '💰 قیمت: ' + this.price(p.price), '',
+        'لطفاً برای ادامه‌ی ثبت سفارش راهنمایی کنید. ممنون 🙏'].filter((l, i) => l !== '' || i).join('\n');
+      return 'https://t.me/' + this.adminTelegram + '?text=' + encodeURIComponent(msg);
+    },
+    orderCustom() {
+      const msg = 'سلام، وقت بخیر 🌿\nمی‌خواهم یک طرح اختصاصی سفارش بدهم.\nلطفاً در مورد جنس، اندازه و زمان تحویل راهنمایی کنید. 🙏';
+      window.open('https://t.me/' + this.adminTelegram + '?text=' + encodeURIComponent(msg), '_blank');
+    },
+
+    /* ---- Menu / keyboard ---- */
+    menuClick(l, e) {
+      this.menuOpen = false;
+      if (l.id === 'contact') { e.preventDefault(); this.contactOpen = true; } else this.activeLink = l.id;
+    },
+    escape() {
+      if (this.openDd) this.openDd = null; else if (this.modalOpen) this.modalOpen = false;
+      else if (this.contactOpen) this.contactOpen = false; else if (this.drawerOpen) this.drawerOpen = false; else this.menuOpen = false;
+    },
+    toggleTheme() {
+        this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', this.theme);
+        try { localStorage.setItem('theme', this.theme); } catch (e) {}
+    },
+  };
+}
+</script>
+</body>
+</html>
